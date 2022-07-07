@@ -20,7 +20,7 @@ static std::string change_separators(const std::string &path){
 
 void LinuxCaseTransformPathFunction::set_root(const std::string &path)
 {
-  alib::tools::ProfilerTimer t(__FUNCTION__);
+  alib::tools::ProfilerTimer t(__PRETTY_FUNCTION__);
 
   std::lock_guard<std::recursive_mutex> guard(mtx);
 
@@ -60,11 +60,11 @@ std::string LinuxCaseTransformPathFunction::linux_transform_function(const char 
   std::string key = alib::to_lower( path.filename().u8string() );
   auto f = files.find(key);
   if( f == files.end() ){
-    std::clog<<__FUNCTION__<<" No requested file: "<< key <<" -> "<< path.u8string() << std::endl;
+    std::clog<<__PRETTY_FUNCTION__<<" No requested file: "<< key <<" -> "<< path.u8string() << std::endl;
     return name;
   }
 
-  std::clog<<__FUNCTION__
+  std::clog<<__PRETTY_FUNCTION__
             //<<" file: "<< path.u8string() << std::endl
             <<" file: "<< name //<< std::endl
             <<" remapped to: "<< f->second.u8string() << std::endl

@@ -33,6 +33,8 @@ public:
 
   Q_INVOKABLE void DrawBgiOn(QPainter *painter);
 
+  Q_SIGNAL void needUpdate();
+
 
 private:
 

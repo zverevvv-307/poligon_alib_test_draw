@@ -13,7 +13,6 @@ find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
 
 add_subdirectory (antlib)
-add_subdirectory (Pie)
 add_subdirectory (VxAnt)
 
 

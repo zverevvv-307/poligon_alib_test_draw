@@ -44,7 +44,7 @@ void SmartYch::setOpened(bool newOpened) {
 }
 
 bool SmartYch::open() {
-  alib::tools::ProfilerTimer t(__FUNCTION__);
+  alib::tools::ProfilerTimer t(__PRETTY_FUNCTION__);
   close();
 
   LinuxCaseTransformPathFunction::set_root( m_path.toStdString() );
@@ -62,6 +62,7 @@ bool SmartYch::open() {
     return false;
   }
   m_opened = true;;
+  needUpdate();
   return m_opened;
 
 }
@@ -70,6 +71,7 @@ void SmartYch::close() {
   if(ych){
     ych->Close();
     ych.reset();
+    needUpdate();
   }
   m_opened = false;
 }
@@ -95,18 +97,19 @@ QString SmartYch::current_sta() const {
 
   std::string sta;
   if(pStan)
-    sta = fs::path(pStan->filename).filename().u8string();
+    sta = fs::path(pStan->filename.c_str()).filename().u8string();
 
   return QString::fromStdString(sta);
 }
 
 void SmartYch::DrawBgiOn(QPainter *painter) {
-  alib::tools::ProfilerTimer t(__FUNCTION__);
+  alib::tools::ProfilerTimer t(__PRETTY_FUNCTION__);
   if (! this->opened())
     return;
 
   try {
     bool s = false;
+//    MOD=ED;
     ::CurrentPicture = this->CurrentPicture;
     ::CurrentStation = this->CurrentStation;
     setAntLibPainter(painter);

@@ -17,7 +17,6 @@ set_source_files_properties(
         QT_QML_SINGLETON_TYPE true
     )
 
-
 file(GLOB CPP_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
     *.cpp
     *.h
@@ -31,6 +30,9 @@ qt_add_qml_module(${TARGET_NAME}
         SOURCES ${CPP_SOURCES}
         QML_FILES ${QML_SOURCES}
 )
+
+
+#target_compile_definitions( ${TARGET_NAME} PUBLIC _VX_ )
 
 target_link_libraries(${TARGET_NAME} PRIVATE
     Qt::Quick

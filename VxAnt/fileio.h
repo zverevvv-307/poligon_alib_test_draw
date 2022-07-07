@@ -23,6 +23,7 @@ public:
   Q_INVOKABLE bool write(const QString& text);
   Q_INVOKABLE bool append(const QString& text);
   Q_INVOKABLE bool rename(const QString& newName);
+  Q_INVOKABLE bool write_binary(const QByteArray &text);
 
   inline QString source() const { return m_file.fileName(); }
   inline bool exists() const { return m_file.exists(); }

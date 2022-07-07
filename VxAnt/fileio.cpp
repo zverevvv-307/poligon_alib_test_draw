@@ -4,6 +4,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QTextStream>
+#include <QDataStream>
 
 FileIO::FileIO(QObject *parent)
     : QObject(parent)
@@ -99,6 +100,25 @@ bool FileIO::append(const QString& text)
 
   QTextStream out(&m_file);
   out << text;
+  m_file.close();
+  return true;
+}
+
+
+bool FileIO::write_binary(const QByteArray& data)
+{
+  if (m_file.fileName().isEmpty()) {
+    error( tr("Empty source file name") );
+    return false;
+  }
+
+  if (!m_file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+    error( tr("Cannot open file '%1' for writing: %2").arg(m_file.fileName(), m_file.errorString()) );
+    return false;
+  }
+
+  QDataStream out(&m_file);
+  out << data;
   m_file.close();
   return true;
 }

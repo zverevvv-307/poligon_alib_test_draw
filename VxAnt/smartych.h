@@ -36,6 +36,8 @@ public:
 
   Q_SIGNAL void keyChanged();
 
+  Q_SIGNAL void needUpdate();
+
 private:
 
   bool open();

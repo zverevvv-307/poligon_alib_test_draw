@@ -44,7 +44,7 @@ void SmartSta::setOpened(bool newOpened) {
 }
 
 bool SmartSta::open() {
-  alib::tools::ProfilerTimer t(__FUNCTION__);
+  alib::tools::ProfilerTimer t(__PRETTY_FUNCTION__);
   try {
     close();
     MOD = RD;
@@ -53,17 +53,19 @@ bool SmartSta::open() {
     sta.reset(new Station());
     if (sta->Open( m_path.toStdString().c_str() ) < 0)
       return false;
-    m_opened = true;;
+    m_opened = true;
   } catch (const std::exception& e) {
     std::clog << "std::exception: " << e.what() << std::endl;
   }
+  needUpdate();
   return m_opened;
 }
 
 void SmartSta::close() {
-  if(sta){
+  if(sta) {
     sta->Close();
     sta.reset();
+    needUpdate();
   }
   m_opened = false;
 }
@@ -78,14 +80,14 @@ QString SmartSta::key() const {
 }
 
 void SmartSta::DrawBgiOn(QPainter *painter) {
-  alib::tools::ProfilerTimer t(__FUNCTION__);
+  alib::tools::ProfilerTimer t(__PRETTY_FUNCTION__);
 
   if ( !this->opened() )
     return;
   try {
     bool s = false;
     ::CurrentPicture = LT;
-    ::MOD=ED;
+//    ::MOD=ED;
     setAntLibPainter(painter);
 
     if (s) {

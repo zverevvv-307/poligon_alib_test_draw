@@ -7,6 +7,8 @@
 #include "smartych.h"
 #include "smartsta.h"
 //#include "myprop_helpers.h"
+#include <QStaticText>
+
 
 class PoligonSimplePainter : public QQuickPaintedItem
 {
@@ -32,5 +34,7 @@ public:
 private:
   SmartYch *m_ych=nullptr;
   SmartSta *m_sta=nullptr;
+
+  QStaticText m_Label;
 };
 

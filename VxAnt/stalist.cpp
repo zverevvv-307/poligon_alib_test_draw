@@ -37,7 +37,7 @@ auto is_sta_file = [](const fs::path& path) {
 
 void StaList::open()
 {
-  alib::tools::ProfilerTimer t(__FUNCTION__);
+  alib::tools::ProfilerTimer t(__PRETTY_FUNCTION__);
 
   fs::path path = m_path.toStdString();
   if ( is_sta_file(path) )
