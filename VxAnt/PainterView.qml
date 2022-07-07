@@ -3,8 +3,6 @@ import QtQuick.Layouts
 import QtQuick.Controls
 
 import VxAnt
-import Pie
-
 
 Item {
     id: root
@@ -31,13 +29,6 @@ Item {
 //            Layout.fillWidth: true
 //            color: "gray"
 //            height: 1
-//        }
-
-//        PieObj{
-//            Layout.fillWidth: true
-//            Layout.preferredHeight: 400
-//            scale: scale.value
-//            sta_filename: root.sta.path
 //        }
 
         Slider{
