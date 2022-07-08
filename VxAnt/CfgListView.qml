@@ -6,7 +6,7 @@ import VxAnt
 
 Pane {
     id: root
-    padding: 0
+    padding: 2
 
     component RowDelegate: Rectangle {
         id: delegate
@@ -43,7 +43,7 @@ Pane {
     ScrollView{
         anchors.fill: parent
         contentWidth: availableWidth
-        padding: 10
+        padding: 0
 
         ListView{
             id: view
