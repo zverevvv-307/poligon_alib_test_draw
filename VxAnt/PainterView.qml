@@ -4,12 +4,12 @@ import QtQuick.Controls
 
 import VxAnt
 
-Item {
+Frame {
     id: root
+    padding: 2
 
     property alias sta:  painter.sta
     property alias ych:  painter.ych
-
 
     ColumnLayout{
         anchors.fill: parent

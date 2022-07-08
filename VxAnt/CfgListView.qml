@@ -21,14 +21,14 @@ Pane {
 
         color: "transparent"
         border.color: "gray"
-        radius: 2
+        radius: 4
 
         MouseArea {
             anchors.fill: delegate
             onClicked: {
                 view.currentIndex = delegate.index
-                //                PoligonBackend.selectedYchPath = path;
-                PoligonBackend.selectedStaPath = path;
+                //PoligonBackend.selectedStaPath = path;
+                PoligonBackend.selectedYchPath = path;
             }
         }
 
@@ -49,12 +49,12 @@ Pane {
             id: view
             spacing: 1
             clip: true
-            //        model:    PoligonBackend.cfg_dir.model
-            model:    PoligonBackend.sta_dir.model
+            model:    PoligonBackend.cfg_dir.model
+            //model:    PoligonBackend.sta_dir.model
             delegate: RowDelegate{}
 
             highlightMoveDuration: 80
-            highlight: Rectangle { color: "gold"; radius: 2 }
+            highlight: Rectangle { color: "gold"; radius: 4 }
             //ScrollBar.vertical: ScrollBar { id: vScrollBar }
         }
     }

@@ -18,10 +18,10 @@ Window {
         path: PoligonBackend.selectedStaPath
     }
 
-    //    SmartYch {
-    //        id: ych
-    //        path: PoligonBackend.selectedYchPath
-    //    }
+    SmartYch {
+        id: ych
+        path: PoligonBackend.selectedYchPath
+    }
 
     Pane{
         anchors.fill: parent
@@ -40,7 +40,8 @@ Window {
             PainterView {
                 SplitView.fillHeight: true
                 SplitView.fillWidth: true
-                sta: sta
+//                sta: sta
+                ych: ych
             }
         }
     }
