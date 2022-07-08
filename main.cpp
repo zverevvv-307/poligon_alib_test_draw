@@ -1,10 +1,19 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QFileInfo>
+#include <QSettings>
 
 
 int main(int argc, char *argv[])
 {
   QGuiApplication app(argc, argv);
+
+  app.setOrganizationName("Gtss");
+  app.setApplicationName(QFileInfo(app.applicationFilePath()).baseName());
+  QSettings::setDefaultFormat(QSettings::IniFormat);
+  QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, "./" );
+  QSettings settings;
+  qDebug()<<"Ini file:"<<settings.fileName();
 
   QQmlApplicationEngine engine;
   const QUrl url(u"qrc:/poligon/main.qml"_qs);

@@ -4,9 +4,9 @@ import QtQuick.Controls
 
 import VxAnt
 
-
-Item {
+Pane {
     id: root
+    padding: 0
 
     component RowDelegate: Rectangle {
         id: delegate
@@ -27,7 +27,7 @@ Item {
             anchors.fill: delegate
             onClicked: {
                 view.currentIndex = delegate.index
-//                PoligonBackend.selectedYchPath = path;
+                //                PoligonBackend.selectedYchPath = path;
                 PoligonBackend.selectedStaPath = path;
             }
         }
@@ -40,18 +40,22 @@ Item {
             Text { text: path }
         }
     }
-
-    ListView{
-        id: view
-        spacing: 1
+    ScrollView{
         anchors.fill: parent
-//        model:    PoligonBackend.cfg_dir.model
-        model:    PoligonBackend.sta_dir.model
-        delegate: RowDelegate{}
+        contentWidth: availableWidth
+        padding: 10
 
-        highlightMoveDuration: 80
-        highlight: Rectangle { color: "#60300030" }
-        ScrollBar.vertical: ScrollBar { id: vScrollBar }
+        ListView{
+            id: view
+            spacing: 1
+            clip: true
+            //        model:    PoligonBackend.cfg_dir.model
+            model:    PoligonBackend.sta_dir.model
+            delegate: RowDelegate{}
+
+            highlightMoveDuration: 80
+            highlight: Rectangle { color: "gold"; radius: 2 }
+            //ScrollBar.vertical: ScrollBar { id: vScrollBar }
+        }
     }
-
 }

@@ -15,6 +15,7 @@ class SmartYch : public QObject
   Q_PROPERTY(bool opened READ opened WRITE setOpened NOTIFY openedChanged)
   Q_PROPERTY(QString key READ key NOTIFY keyChanged)
   Q_PROPERTY(QString current_sta READ current_sta)
+  Q_PROPERTY(QString name READ name NOTIFY openedChanged)
   QML_ELEMENT
 
 public:
@@ -22,6 +23,8 @@ public:
   explicit SmartYch(QObject *parent = nullptr);
 
   QString key() const;
+  QString name() const;
+  Q_INVOKABLE void DrawBgiOn(QPainter *painter);
 
   const QString& path() const { return m_path; }
   void setPath(const QString &newPath);
@@ -31,18 +34,15 @@ public:
   void setOpened(bool newOpened);
   Q_SIGNAL void openedChanged();
 
-  Q_INVOKABLE void DrawBgiOn(QPainter *painter);
   QString current_sta() const;
 
   Q_SIGNAL void keyChanged();
-
   Q_SIGNAL void needUpdate();
 
 private:
 
   bool open();
   void close();
-
 
   QString m_path;
   bool m_opened = false;

@@ -79,6 +79,11 @@ QString SmartSta::key() const {
   return QString::fromStdString( fs::path( m_path.toStdString() ).filename().u8string() ).toLower();
 }
 
+QString SmartSta::name() const
+{
+  return sta ? sta->Name().asQString() : "No Data";
+}
+
 void SmartSta::DrawBgiOn(QPainter *painter) {
   alib::tools::ProfilerTimer t(__PRETTY_FUNCTION__);
 

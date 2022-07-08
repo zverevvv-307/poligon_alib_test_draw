@@ -85,6 +85,12 @@ QString SmartYch::key() const {
   return QString::fromStdString( fs::path( m_path.toStdString() ).filename().u8string() ).toLower();
 }
 
+QString SmartYch::name() const
+{
+  return ych ? ych->Name().asQString() : "No Data";
+}
+
+
 QString SmartYch::current_sta() const {
 
   Station *pStan = nullptr;

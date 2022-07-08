@@ -1,11 +1,12 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Qt.labs.settings 1.0
 
 import VxAnt
 
 Window {
-    id: root
+    id: appWindow
     width: 620
     height: 480
     visible: true
@@ -13,33 +14,43 @@ Window {
 
     SmartSta {
         id: sta
-//        path: "./ste/sta/holoni.ste"
+        //        path: "./ste/sta/holoni.ste"
         path: PoligonBackend.selectedStaPath
     }
 
-//    SmartYch {
-//        id: ych
-//        path: PoligonBackend.selectedYchPath
-//    }
+    //    SmartYch {
+    //        id: ych
+    //        path: PoligonBackend.selectedYchPath
+    //    }
 
-
-    SplitView{
+    Pane{
         anchors.fill: parent
+        padding: 4
 
-        CfgListView{
-            SplitView.minimumWidth: 50
-            SplitView.preferredWidth: 150
-            SplitView.maximumWidth: 300
-        }
+        SplitView{
+            anchors.fill: parent
+            padding: 0
 
-        PainterView {
-            SplitView.fillHeight: true
-            SplitView.fillWidth: true
-            sta: sta
+            CfgListView{
+                SplitView.minimumWidth: 50
+                SplitView.preferredWidth: 150
+                SplitView.maximumWidth: 300
+            }
+
+            PainterView {
+                SplitView.fillHeight: true
+                SplitView.fillWidth: true
+                sta: sta
+            }
         }
     }
 
 
-//    Component.onCompleted: {
-//    }
+    Settings {
+        id: settings
+        property alias x: appWindow.x
+        property alias y: appWindow.y
+        property alias width: appWindow.width
+        property alias height: appWindow.height
+    }
 }
