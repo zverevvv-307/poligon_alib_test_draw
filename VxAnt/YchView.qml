@@ -17,21 +17,24 @@ Pane {
     ColumnLayout{
         anchors.fill: parent
 
-        PoligonSimplePainter{
-            id: painter
+        Item{
             Layout.fillWidth: true
             Layout.fillHeight: true
-            scale: scale.value
-            ych: ych
-        }
+            PoligonSimplePainter{
+                id: painter
+                anchors.fill: parent
+                scale: control.scale_value
+                rotation: control.rotation_value
+                ych: ych
 
-        Slider{
-            id: scale
-            Layout.fillWidth: true
-            Layout.preferredHeight: 20
-            from: 0.01
-            to: 2
-            value: 1
+            }
+            RenderControlsForm{
+                id: control
+                anchors{
+                    right: parent.right
+                    bottom: parent.bottom
+                }
+            }
         }
 
         Connections{
