@@ -28,7 +28,7 @@ Pane {
             onClicked: {
                 view.currentIndex = delegate.index
                 //PoligonBackend.selectedStaPath = path;
-                PoligonBackend.selectedYchPath = path;
+                //PoligonBackend.selectedYchPath = path;
             }
         }
 
@@ -36,26 +36,23 @@ Pane {
             anchors.fill: parent
             anchors.margins: 4
             spacing: 20
-            //Text { text: key }
-            Text { text: path }
+            Text { text: key }
+            //            Text { text: path }
         }
     }
-    ScrollView{
+
+    ListView{
+        id: view
         anchors.fill: parent
-        contentWidth: availableWidth
-        padding: 0
 
-        ListView{
-            id: view
-            spacing: 1
-            clip: true
-            model:    PoligonBackend.cfg_dir.model
-            //model:    PoligonBackend.sta_dir.model
-            delegate: RowDelegate{}
+        spacing: 1
+        clip: true
+        //model:    PoligonBackend.ych_dir.model
+        model:    PoligonBackend.sta_dir.model
+        delegate: RowDelegate{}
 
-            highlightMoveDuration: 80
-            highlight: Rectangle { color: "gold"; radius: 4 }
-            //ScrollBar.vertical: ScrollBar { id: vScrollBar }
-        }
+        highlightMoveDuration: 80
+        highlight: Rectangle { color: "gold"; radius: 4 }
+        ScrollBar.vertical: ScrollBar { id: vScrollBar }
     }
 }

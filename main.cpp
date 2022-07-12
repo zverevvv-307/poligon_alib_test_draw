@@ -1,3 +1,4 @@
+//#include <QApplication>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QFileInfo>
@@ -6,6 +7,7 @@
 
 int main(int argc, char *argv[])
 {
+//  QApplication app(argc, argv);
   QGuiApplication app(argc, argv);
 
   app.setOrganizationName("Gtss");

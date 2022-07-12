@@ -4,9 +4,34 @@ import QtQuick
 import VxAnt
 
 
-
 Item {
     id: root
+
+    property string cfg_root: ""
+
+
+    readonly property JSONListModel ych_dir: JSONListModel{
+        query:"$.items.*"
+    }
+    readonly property JSONListModel sta_dir: JSONListModel{
+        query:"$.items.*"
+    }
+
+    YchList{
+        path: cfg_root
+        onJsonChanged: (txt) => {
+            ych_dir.json = txt;
+            console.log("*** New Model", txt)
+        }
+    }
+
+    StaList{
+        path: cfg_root
+        onJsonChanged: (txt) => {
+            sta_dir.json = txt;
+            console.log("*** New Model", txt)
+        }
+    }
 
     property string selectedYchPath: ""
     onSelectedYchPathChanged: console.log("***", selectedYchPath);
@@ -15,28 +40,8 @@ Item {
     onSelectedStaPathChanged: console.log("***", selectedStaPath);
 
 
-    property string root_dir: ""
-
-
-    readonly property JSONListModel cfg_dir: JSONListModel{
-        query:"$.items.*"
-    }
-    readonly property JSONListModel sta_dir: JSONListModel{
-        query:"$.items.*"
-    }
-
-    YchList{
-        path: root_dir
-        onJsonChanged: (txt) => { cfg_dir.json = txt; }
-    }
-
-    StaList{
-        path: root_dir
-        onJsonChanged: (txt) => { sta_dir.json = txt; }
-    }
 
 
     Component.onCompleted: {
-        root.root_dir = "./ste"
     }
 }
