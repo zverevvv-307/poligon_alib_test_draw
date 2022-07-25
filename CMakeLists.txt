@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 get_filename_component(TARGET_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
-project( ${TARGET_NAME} VERSION 22.5 LANGUAGES CXX )
+project( ${TARGET_NAME} VERSION 22.7 LANGUAGES CXX )
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -9,8 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 17)
 
 
-find_package(Qt6 6.3 COMPONENTS Quick REQUIRED)
-
+find_package(Qt6 REQUIRED COMPONENTS Widgets Quick)
 
 add_subdirectory (antlib)
 add_subdirectory (VxAnt)
@@ -37,7 +36,7 @@ set_target_properties(app_poligon PROPERTIES
 target_compile_definitions(app_poligon
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(app_poligon  PRIVATE
+    Qt6::Widgets
     Qt6::Quick
-    antlib
 )
 

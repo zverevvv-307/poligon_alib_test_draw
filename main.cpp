@@ -1,4 +1,4 @@
-//#include <QApplication>
+#include <QApplication>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QFileInfo>
@@ -7,8 +7,8 @@
 
 int main(int argc, char *argv[])
 {
-//  QApplication app(argc, argv);
-  QGuiApplication app(argc, argv);
+  QApplication app(argc, argv);
+//  QGuiApplication app(argc, argv);
 
   app.setOrganizationName("Gtss");
   app.setApplicationName(QFileInfo(app.applicationFilePath()).baseName());
@@ -26,8 +26,8 @@ int main(int argc, char *argv[])
       }, Qt::QueuedConnection);
 
 
-//  engine.addImportPath(QStringLiteral(":/"));
-//  engine.addImportPath(".");
+  engine.addImportPath(QStringLiteral(":/"));
+  engine.addImportPath(".");
 //  engine.addImportPath("..");
   engine.load(url);
 

@@ -27,7 +27,7 @@ void LinuxCaseTransformPathFunction::set_root(const std::string &path)
   root = change_separators(path);
   root.make_preferred();
 
-  std::string ex = alib::to_lower( root.extension() );
+  std::string ex = alib::to_lower( root.extension().u8string()  );
   if ( ex == ".ych"
       || ex == ".yce"
       || ex == ".sta"

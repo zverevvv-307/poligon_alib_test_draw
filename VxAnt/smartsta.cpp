@@ -92,7 +92,6 @@ void SmartSta::DrawBgiOn(QPainter *painter) {
   try {
     bool s = false;
     ::CurrentPicture = LT;
-//    ::MOD=ED;
     setAntLibPainter(painter);
 
     if (s) {

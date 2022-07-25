@@ -31,7 +31,7 @@ void StaList::setPath(const QString &newPath)
 
 
 auto is_sta_file = [](const fs::path& path) {
-  std::string ex = alib::to_lower( path.extension() );
+  std::string ex = alib::to_lower( path.extension().u8string()  );
   return ex == ".sta" || ex == ".ste";
 };
 
@@ -51,9 +51,9 @@ void StaList::open()
       if( not is_sta_file(dir_entry) )
         continue;
       QJsonObject o {
-          {"key",  QString::fromStdString(key)},
-          {"type", QString::fromStdString(dir_entry.path().extension()).toLower()},
-          {"path", QString::fromStdString(dir_entry.path().lexically_normal().u8string())}
+          {"key",  QString::fromUtf8(key)},
+          {"type", QString::fromUtf8(dir_entry.path().extension().u8string()).toLower()},
+          {"path", QString::fromUtf8(dir_entry.path().lexically_normal().u8string())}
       };
       list.append(o);
       std::cout << key << " -> " << dir_entry << std::endl;

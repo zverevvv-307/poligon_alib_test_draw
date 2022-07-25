@@ -20,6 +20,40 @@ ApplicationWindow {
         console.log("*** Root Dir:", cfg_root);
     }
 
+    Menu {
+        id: fileMenu
+        title: qsTr("&File")
+        MenuItem {
+            text: qsTr("&Open Root")
+            icon.name: "document-open"
+            onTriggered: folderDialog.open()
+        }
+
+        Menu {
+            id: recentFilesSubMenu
+            title: qsTr("Recent Files")
+            enabled: recentFilesInstantiator.count > 0
+
+            Instantiator {
+                id: recentFilesInstantiator
+                model: settings.recentFiles
+                delegate: MenuItem {
+                    text: model.modelData
+                    onTriggered: cfg_root = model.modelData
+                }
+
+                onObjectAdded: recentFilesSubMenu.insertItem(index, object)
+                onObjectRemoved: recentFilesSubMenu.removeItem(object)
+            }
+
+            MenuSeparator {}
+
+            MenuItem {
+                text: qsTr("Clear Recent Files")
+                onTriggered: settings.clearRecentFiles()
+            }
+        }
+    }
 
     header: RowLayout{
         width: appWindow.width
@@ -27,8 +61,14 @@ ApplicationWindow {
             id: tabs
             Layout.preferredWidth: 100
             TabButton {
-                text: qsTr("Main")
+                text: qsTr("General")
                 background: Rectangle { color: tabs.currentIndex === 0 ? "green" : "gray" }
+                onClicked: {
+                }
+            }
+            TabButton {
+                text: qsTr("Tools")
+                background: Rectangle { color: tabs.currentIndex === 1 ? "green" : "gray" }
                 onClicked: {
                 }
             }
@@ -38,10 +78,12 @@ ApplicationWindow {
             horizontalAlignment: Text.AlignHCenter
             text: ychPage.title + "  %  " + staPage.title
         }
-        Text {
+        Button {
+            Layout.preferredHeight: 20
+            Layout.preferredWidth:  20
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-            text: "# "
-            //onClicked: folderDialog.open()
+            text: "#"
+            onClicked: fileMenu.open()
         }
     }
 
@@ -85,17 +127,38 @@ ApplicationWindow {
         property alias width: appWindow.width
         property alias height: appWindow.height
         property alias cfg_root: appWindow.cfg_root
+        property var   recentFiles: ["./"]
+
+        function clearRecentFiles() { recentFiles.clear(); }
+        function addRecentFiles(path) {
+            recentFiles.push(path);
+            if(recentFiles.length>7)
+                recentFiles.pop();
+        }
     }
 
-//    FolderDialog{ //suka +widget and +QApplication needed
-//        id: folderDialog
-//    }
+    FolderDialog {
+        id: folderDialog
+        onAccepted:{
+           cfg_root = stripFileUrlToPath(folder);
+           settings.addRecentFiles(cfg_root);
+        }
+        function stripFileUrlToPath(url) {
+            var urlString = url.toString();
+            //    path = path.replace(/^(file:\/{2})|(qrc:\/{2})|(http:\/{2})/,""); not portable
+            var s
+            if (urlString.startsWith("file:///")) {
+                var k = urlString.charAt(9) === ':' ? 8 : 7
+                s = urlString.substring(k)
+            } else {
+                s = urlString
+            }
+            return decodeURIComponent(s);//unescape html codes like '%23' for '#'
+        }
+    }
 
 
     Component.onCompleted: {
-//        appWindow.cfg_root = "./ste"
     }
-
-
 
 }
