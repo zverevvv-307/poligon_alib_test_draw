@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_CXX_STANDARD 17)
 
-
+include(qtdef.cmake)
 find_package(Qt6 REQUIRED COMPONENTS Widgets Quick)
 
 add_subdirectory (antlib)
